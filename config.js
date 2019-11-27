@@ -1,0 +1,1 @@
+module.exports.connectionURL = 'mongodb+srv://vala:11110000@lab7-sxtzg.mongodb.net/test?retryWrites=true&w=majority'

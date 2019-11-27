@@ -1,7 +1,6 @@
+const Character = require('./models/character')
 const express = require('express')
 require('./db/mongoose')
-
-const Character = require('./models/character')
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -45,7 +44,7 @@ app.patch('/characters/:id', function (req, res) {
 
     if (!isValidUpdate) {
         return res.status(400).send({
-            error: 'Error, solo se puede actualizar: ' + allowedUpdates
+            error: 'Error, solo se pueden actualizar los siguientes campos: ' + allowedUpdates
         })
     }
     Character.findByIdAndUpdate(_id, req.body).then(function (person) {
@@ -72,9 +71,9 @@ app.delete('/characters/:id', function (req, res) {
 
 app.get('*', function(req, res) {
     res.send({
-      error: 'This route does not exist'
+        error: 'This route does not exist'
     })
-  })
+})
 
 app.listen(port, function () {
     console.log('Up And Ready in port ' + port)

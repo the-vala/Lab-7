@@ -70,6 +70,12 @@ app.delete('/persons/:id', function (req, res) {
     })
 })
 
+router.get('*', function(req, res) {
+    res.send({
+      error: 'This route does not exist'
+    })
+  })
+
 app.listen(port, function () {
     console.log('Up And Ready ' + port)
 })

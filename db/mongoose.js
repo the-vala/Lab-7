@@ -4,5 +4,7 @@ const connectionURL = 'mongodb+srv://vala:11110000@lab7-sxtzg.mongodb.net/test?r
 
 mongoose.connect(connectionURL, {
     useNewUrlParser: true,
-    useCreateIndex: true,
+    useCreateIndex: true,     // crear indexes
+    useUnifiedTopology: true,
+    useFindAndModify: false
 })

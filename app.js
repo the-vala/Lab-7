@@ -4,11 +4,11 @@ require('./db/mongoose')
 const Character = require('./models/character')
 
 const app = express()
-const port = process.env.PORT || 1337
+const port = process.env.PORT || 3000
 
 app.use(express.json())
 
-app.post('/persons', function (req, res) {
+app.post('/characters', function (req, res) {
     const person = new Character(req.body)
     person.save().then(function () {
         return res.send(person)
@@ -17,7 +17,7 @@ app.post('/persons', function (req, res) {
     })
 })
 
-app.get('/persons', function (req, res) {
+app.get('/characters', function (req, res) {
     Character.find({}).then(function (persons) {
         res.send(persons)
     }).catch(function (error) {
@@ -25,7 +25,7 @@ app.get('/persons', function (req, res) {
     })
 })
 
-app.get('/persons/:id', function (req, res) {
+app.get('/characters/:id', function (req, res) {
     const _id = req.params.id
     Character.findById(_id).then(function (person) {
         if (!person) {
@@ -37,7 +37,7 @@ app.get('/persons/:id', function (req, res) {
     })
 })
 
-app.patch('/persons/:id', function (req, res) {
+app.patch('/characters/:id', function (req, res) {
     const _id = req.params.id
     const updates = Object.keys(req.body)
     const allowedUpdates = ['name', 'father', 'mother']
@@ -58,7 +58,7 @@ app.patch('/persons/:id', function (req, res) {
     })
 })
 
-app.delete('/persons/:id', function (req, res) {
+app.delete('/characters/:id', function (req, res) {
     const _id = req.params.id
     Character.findByIdAndDelete(_id, req.body).then(function (person) {
         if (!person) {
@@ -77,5 +77,5 @@ app.get('*', function(req, res) {
   })
 
 app.listen(port, function () {
-    console.log('Up And Ready ' + port)
+    console.log('Up And Ready in port ' + port)
 })
